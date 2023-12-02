@@ -1,5 +1,4 @@
 import * as dao from "./dao.js";
-// let currentUser = null;
 function UserRoutes(app) {
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
@@ -24,8 +23,8 @@ function UserRoutes(app) {
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const status = await dao.updateUser(userId, req.body);
-    currentUser = await dao.findUserById(userId);
-    res.json(status);
+    const currentUser = await dao.findUserById(userId);
+    res.json({status, user: currentUser});
   };
 
   const signup = async (req, res) => {
